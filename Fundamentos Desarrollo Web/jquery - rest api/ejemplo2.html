@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Links js y jquery</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                console.log("Objeto seleccionado: " + $('div.list-group > div > a:first').html());
+                $('div.list-group > div > a:first').click(function(){
+                    alert("Se ha precionado el primer item..");
+                });
+                $('div.list-group > div > a:last-child').click(function(){
+                    alert("Se ha precionado el último item..");
+                });
+            });
+        </script>
+        
+	</head>
+	<body>
+		<div class="container">
+			<h2>Links js y jquery</h2>
+			<div class="list-group">
+                <div class"ejemplo">
+                    <a href="https://www.tutorialrepublic.com/jquery-tutorial/" class="list-group-item list-group-item-action">JQuery Tutorial</a>
+				    <a href="https://jquery.com/" class="list-group-item list-group-item-action">P&aacute;gina oficial JQuery</a>
+                </div>
+                <div class"ejemplo2">
+                    <a href="http://vanilla-js.com/" class="list-group-item list-group-item-action">Vanilla JS</a>
+				    <a href="https://jqueryui.com/effect/" class="list-group-item list-group-item-action">JQuery UI effects</a>
+                </div>
+            </div>
+		<div>
+	</body>
+</html>

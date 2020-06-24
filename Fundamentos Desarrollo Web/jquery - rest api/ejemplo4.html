@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Links js y jquery</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
+        <script>
+            $(document).ready(function(){
+                
+                $('#btnBuscar').click(function(){
+                    var citiesJsonObject = null;
+                    getCities();
+                    console.log("Se estan leyendo los datos");
+                });
+            });
+
+            function getCities(){
+                var respuesta = null;
+                $.ajax({
+                    type:"GET",
+                    url:"https://api.meetup.com/2/cities",
+                    success: function(data) {
+                        console.log("atos leidos correctameteD");
+                        console.log("Resultado: " + JSON.stringify(data.results));   
+                        console.log(data.results[0]);
+                        console.log(data.results[0].zip);
+                        data.results.forEach(element => {
+                            console.log(element);
+                        }); 
+
+                        data.results.forEach(element => {
+                            console.log("ZIP: " + element.zip);
+                            console.log("COUNTRY: " + element.country);
+                            console.log("COUNTRY NAME: " + element.localized_country_name);
+                            console.log("CITY: " + element.city);
+                            var html = "<tr><td>" + element.zip + "</td>" +
+                                            "<td>" + element.country + "</td>" +
+                                            "<td>" + element.localized_country_name + "</td>" +
+                                            "<td>" + element.city + "</td>" +
+                                        "</tr>";
+                            $('#tblData tr:last').after(html);
+                        }); 
+                    },
+                    dataType: 'jsonp'
+                }); 
+                return respuesta;
+            }
+        </script>
+        
+	</head>
+	<body>
+        <div id="divContainer" class="class="container"">+
+           <button id="btnBuscar">Buscarr</button>
+        </div>
+        <table id="tblData">
+            <tr>
+                <th>ZIP</th>
+                <th>COUNTRY</th>
+                <th>COUNTRY NAME</th>
+                <th>CITY</th>
+            </tr>
+
+        </table>
+		
+	</body>
+</html>

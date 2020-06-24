@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Links js y jquery</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+
+    <script>
+        var miDataTable = null;
+        $(document).ready(function () {
+            miDataTable = $('#tblData').DataTable({
+                paging: false,
+                searching: false
+            });
+            $('#btnBuscar').click(function () {
+                getPokemones();
+            });
+        });
+
+        function getPokemones() {
+            $.ajax({
+                url: "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10",
+                type: "GET",
+                contentType: 'application/json',
+                
+                responseType: 'application/json',
+                
+                headers: {
+                    'Access-Control-Allow-Credentials': true,
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET',
+                    'Access-Control-Allow-Headers': 'application/json',
+                },
+                success: function (data) {
+                    data.results.forEach(element => {
+                        console.log(element.name);
+                        console.log(element.url);
+                    });
+
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="divContainer" class="class=" container"">
+        <button id="btnBuscar">Buscar</button>
+    </div>
+
+    </table>
+
+</body>
+
+</html>

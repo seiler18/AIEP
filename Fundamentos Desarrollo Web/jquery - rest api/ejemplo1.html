@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Ejemplo 1 Jquery</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<style>
+		.button {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+	</style>
+	<script>
+		var nleyenda = 1;
+		$(document).ready(function () { 
+			$("button").mouseover(function () { 
+				$(".button").animate({ 
+					backgroundColor: "#4CFF50"
+				}); 
+			}); 
+
+			$("button").mouseout(function () { 
+				$(".button").animate({ 
+					backgroundColor: "#4CAF50" 
+				}); 
+			}); 
+
+			$("#btn1").click(function () { 
+				$("#divLeyenda").html($("#divLeyenda").html() +  "<h6>Leyenda prueba " + nleyenda + "</h6>");
+				nleyenda++; 
+			}); 
+		});
+	</script>
+</head>
+
+<body>
+	<div>
+		<button id="btn1" class="button" name="btnUno" title="Ejemplo: Bot&oacute;n 1">Bot&oacute;n 1</button>
+	</div>
+	<div id="divLeyenda" />
+</body>
+
+</html>
