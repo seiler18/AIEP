@@ -19,23 +19,42 @@
     <script>
         var miDataTable = null;
         $(document).ready(function () {
+            getPokemones();
             miDataTable = $('#tblData').DataTable({
                 paging: false,
                 searching: false
             });
             $('#btnBuscar').click(function () {
-                getPokemones();
+                alert($('#selPokemon').val());
+                $.ajax({
+                    url: $('#selPokemon').val(),
+                    type: "GET",
+                    contentType: 'application/json',
+                    responseType: 'application/json',
+                    headers: {
+                        'Access-Control-Allow-Credentials': true,
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'GET',
+                        'Access-Control-Allow-Headers': 'application/json',
+                    },
+                    success: function (data) {
+                        console.log(data.name);
+                        console.log(data.sprites.front_default);
+                        data.abilities.forEach(element => {
+                            console.log("Elementos habilidades: " + JSON.stringify(element));
+                            console.log("Elementos habilidades: " + JSON.stringify(element));
+                        });
+                    }
+                });
             });
         });
 
         function getPokemones() {
             $.ajax({
-                url: "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10",
+                url: "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100",
                 type: "GET",
                 contentType: 'application/json',
-                
                 responseType: 'application/json',
-                
                 headers: {
                     'Access-Control-Allow-Credentials': true,
                     'Access-Control-Allow-Origin': '*',
@@ -46,6 +65,13 @@
                     data.results.forEach(element => {
                         console.log(element.name);
                         console.log(element.url);
+                        var optionText = element.name;
+                        var optionValue = element.url;
+                        $('#selPokemon').append(
+                            `<option value="${optionValue}"> 
+                                ${optionText} 
+                            </option>`
+                        );
                     });
 
                 }
@@ -56,7 +82,9 @@
 </head>
 
 <body>
-    <div id="divContainer" class="class=" container"">
+    <div id="divContainer" class="container">
+        <select id="selPokemon" class="form-control" id="exampleFormControlSelect1">
+        </select>
         <button id="btnBuscar">Buscar</button>
     </div>
 
